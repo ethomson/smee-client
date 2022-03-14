@@ -1,11 +1,3 @@
-node_modules
-npm-debug.log
-*.pem
-.env
-logs.json
-server/public/main.min.*
-coverage
-.vscode
-index.js
-*.d.ts
-*.tsbuildinfo
+node_modules/
+bin/
+coverage/

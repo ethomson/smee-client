@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const program = require('commander')
+const { program } = require('commander')
 const { version } = require('../package.json')
 
-const Client = require('..')
+const Client = require('./client')
 
 program
   .version(version, '-v, --version')
@@ -14,15 +14,15 @@ program
   .option('-P, --path <path>', 'URL path to post proxied requests to`', '/')
   .parse(process.argv)
 
-let target
-if (program.target) {
-  target = program.target
+let target: string
+if (program.opts().target) {
+  target = program.opts().target
 } else {
-  target = `http://127.0.0.1:${program.port}${program.path}`
+  target = `http://127.0.0.1:${program.opts().port}${program.opts().path}`
 }
 
 async function setup () {
-  let source = program.url
+  let source = program.opts().url
 
   if (!source) {
     source = await Client.createChannel()
